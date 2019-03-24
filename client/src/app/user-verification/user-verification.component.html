@@ -1,0 +1,45 @@
+<br>
+<h4 align="center">VERIFICATION OF USER</h4>
+<div *ngFor="let user of usersList">
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <b> {{user.name.firstName}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&ensp;{{user.name.lastName}}</b>
+        </mat-panel-title>
+        <mat-panel-title>
+          <b> {{user.ssn}} </b>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&ensp;&ensp;&ensp;&ensp;&ensp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&ensp;&ensp;&ensp;&ensp;&ensp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&ensp;&ensp;&ensp;&ensp;&ensp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&ensp;&ensp;&ensp;&ensp;&ensp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&ensp;&ensp;&ensp;&ensp;&ensp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&ensp;&ensp;&ensp;&ensp;&ensp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&ensp;&ensp;&ensp;&ensp;&ensp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&ensp;&ensp;&ensp;&ensp;&ensp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&ensp;&ensp;&ensp;&ensp;&ensp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&ensp;&ensp;&ensp;&ensp;&ensp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&ensp;&ensp;&ensp;&ensp;&ensp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&ensp;&ensp;&ensp;&ensp;&ensp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <img src="../../assets/images/icons8-checkmark-48.png" (click)="verifyUser(user)" style="height:20px; width:20px;" />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&ensp;&ensp;
+          <img src="../../assets/images/icons8-delete-48.png" (click)="deleteUser(user)" style="height:20px; width:20px;" />
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-panel-title>
+        <table class="table">
+          <tbody>
+            <tr>
+
+              <td>First Name:</td>
+              <td>{{user.name.firstName}}</td>
+              <td>Last Name:</td>
+              <td>{{user.name.lastName}}</td>
+            </tr>
+            <tr>
+              <td>Phone Number:</td>
+              <td>{{user.phoneNo}}</td>
+              <td>Email Address:</td>
+              <td>{{user.email}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </mat-panel-title>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

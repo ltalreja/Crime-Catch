@@ -7,6 +7,8 @@ var sassMiddleware = require('node-sass-middleware');
 var favicon = require('serve-favicon');
 var bodyParser = require('body-parser');
 var cors = require('cors');
+const nodemailer = require('nodemailer');
+const expressHandlebars = require('express-handlebars');
 // [SH] Require Passport
 var passport = require('passport');
 
@@ -65,7 +67,7 @@ app.use(function (req, res, next) {
 app.use(function (err, req, res, next) {
     if (err.name === 'UnauthorizedError') {
         res.status(401);
-        res.json({"message": err.name + ": " + err.message});
+        res.json({message: err.name + ": " + err.message});
     }
 });
 

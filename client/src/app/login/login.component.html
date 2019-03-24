@@ -1,0 +1,33 @@
+<mat-card class="main-container">
+  <mat-card-title>
+    LOGIN
+  </mat-card-title><br>
+  <mat-card-content>
+    <form novalidate [formGroup]="loginForm" (ngSubmit)="login()">
+      <table>
+        <tr>
+          <td>
+            <mat-form-field class="demo-full-width">
+              <mat-label>Email</mat-label>
+              <input class="full" matInput type="email" placeholder="Enter Email Here" name="email" formControlName="email">
+              <mat-error *ngIf="loginForm.controls.email.invalid">{{getEmailErrorMessage()}}</mat-error>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="demo-full-width">
+              <mat-label>Password</mat-label>
+              <input class="full" matInput placeholder="Password" name="password" [type]="hide ? 'text' : 'password'"
+                formControlName="password">
+              <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+              <mat-error *ngIf="loginForm.controls.password.invalid">{{getPasswordErrorMessage()}}</mat-error>
+            </mat-form-field>
+          </td>
+        </tr>
+      </table><br>
+      <button mat-raised-button class="btnColor">LOG IN</button>
+    </form>
+  </mat-card-content><br>
+  <p class="lead">Not a user? <br>Please register <a routerLink="/signup"> here</a> </p>
+</mat-card>

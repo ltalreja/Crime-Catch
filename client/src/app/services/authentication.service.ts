@@ -1,17 +1,17 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {TokenPayload, TokenResponse} from "../models/token";
-import {UserInfo} from "../models/userInfo";
-
+import {UserCrisis, UserInfo} from "../models/userInfo";
+//import 'rxjs/add/operate/map';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-
+  private payload = new HttpParams();
   private token: string;
 
   constructor(private http: HttpClient, private router: Router) {
@@ -56,7 +56,32 @@ export class AuthenticationService {
     }
   }
 
-  private request(method: 'post' | 'get' | 'put', type: 'login' | 'register' | 'profile', user?): Observable<any> {
+
+  public isPolice(): boolean {
+
+    const user = this.getUserInfo();
+    if (user && user.role === 'Police') {
+      return true;
+    } else {
+      return false;
+    }
+
+
+  }
+
+  public isUser(): boolean {
+
+    const user = this.getUserInfo();
+    if (user && user.role === 'User') {
+      return true;
+    } else {
+      return false;
+    }
+
+
+  }
+
+  private request(method: 'post' | 'get' | 'put' | 'delete', type: 'login' | 'register' | 'profile' | 'crimes' | 'crisis' | 'users' | 'allData', user?): Observable<any> {
     let base;
 
     switch (type) {
@@ -69,9 +94,33 @@ export class AuthenticationService {
           this.http.put(`/api/${type}`, user, {headers: {Authorization: `Bearer ${this.getToken()}`}}) :
           this.http.get(`/api/${type}`, {headers: {Authorization: `Bearer ${this.getToken()}`}});
         break;
+      case 'crimes':
+        base = this.http.get(`/api/${type}`, {params: this.payload, headers: {Authorization: `Bearer ${this.getToken()}`}});
+        break;
+      case 'crisis':
+        base = this.http.post(`/api/${type}`, user, {headers: {Authorization: `Bearer ${this.getToken()}`}});
+        break;
+      case 'users':
+        if (method === 'put') {
+          base = this.http.put(`/api/${type}`, user, {headers: {Authorization: `Bearer ${this.getToken()}`}});
+        } else if (method === 'get') {
+          base = this.http.get(`/api/${type}`, {
+            params: this.payload,
+            headers: {Authorization: `Bearer ${this.getToken()}`}
+          });
+        } else if (method === 'delete') {
+          base = this.http.delete(`/api/${type}`, {
+            params: this.payload,
+            headers: {Authorization: `Bearer ${this.getToken()}`}
+          });
+        }
+        break;
+      case 'allData':
+        base = this.http.get(`/api/${type}`);
+		break;
     }
 
-    const request = base.pipe(
+    return base.pipe(
       map((data: TokenResponse) => {
         if (data.token) {
           this.saveToken(data.token);
@@ -79,8 +128,6 @@ export class AuthenticationService {
         return data;
       })
     );
-
-    return request;
   }
 
   public register(user: TokenPayload): Observable<any> {
@@ -88,6 +135,7 @@ export class AuthenticationService {
   }
 
   public login(user: TokenPayload): Observable<any> {
+    console.log(this);
     return this.request('post', 'login', user);
   }
 
@@ -97,6 +145,32 @@ export class AuthenticationService {
 
   public updateProfile(userInfo: UserInfo): Observable<any> {
     return this.request('put', 'profile', userInfo);
+  }
+
+  public getCrimes(params: HttpParams): Observable<any> {
+    this.payload = params;
+    return this.request('get', 'crimes');
+  }
+
+  public sendSos(userCrisis: UserCrisis): Observable<any> {
+    return this.request('post', 'crisis', userCrisis);
+  }
+
+  public fetchUsers(params: HttpParams): Observable<any> {
+    this.payload = params;
+    return this.request('get', 'users');
+  }
+
+  public verifyUser(userInfo: UserInfo): Observable<any> {
+    return this.request('put', 'users', userInfo);
+  }
+
+  public deleteUser(params: HttpParams): Observable<any> {
+    this.payload = params;
+    return this.request('delete', 'users');
+  }
+  public getAllData(): Observable<any> {
+    return this.request('get', 'allData');
   }
 
 }

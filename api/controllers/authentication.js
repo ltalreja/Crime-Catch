@@ -9,15 +9,7 @@ var sendJSONresponse = function (res, status, content) {
 
 module.exports.register = function (req, res) {
 
-    // if(!req.body.name || !req.body.email || !req.body.password) {
-    //   sendJSONresponse(res, 400, {
-    //     "message": "All fields required"
-    //   });
-    //   return;
-    // }
-
     var user = new User();
-
     user.name.firstName = req.body.name.firstName;
     user.name.lastName = req.body.name.lastName;
     user.email = req.body.email;
@@ -31,10 +23,12 @@ module.exports.register = function (req, res) {
     user.address.zip = req.body.address.zip;
     user.address.country = req.body.address.country;
     user.address.city = req.body.address.city;
+    user.emergencyContact.email = req.body.emergencyContact.email;
+    user.emergencyContact.name = req.body.emergencyContact.name;
     user.setPassword(req.body.password);
     user.save(function (err) {
         if (err) {
-            res.status(500).json(err);
+            res.status(500).json({message: err});
         } else {
             var token;
             token = user.generateJwt();
@@ -48,19 +42,12 @@ module.exports.register = function (req, res) {
 
 module.exports.login = function (req, res) {
 
-    // if(!req.body.email || !req.body.password) {
-    //   sendJSONresponse(res, 400, {
-    //     "message": "All fields required"
-    //   });
-    //   return;
-    // }
-
     passport.authenticate('local', function (err, user, info) {
         var token;
 
         // If Passport throws/catches an error
         if (err) {
-            res.status(404).json(err);
+            res.status(404).json({message: err});
             return;
         }
 
@@ -73,7 +60,7 @@ module.exports.login = function (req, res) {
             });
         } else {
             // If user is not found
-            res.status(401).json(info);
+            res.status(401).json({message: 'User Not Found'});
         }
     })(req, res);
 

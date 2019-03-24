@@ -1,0 +1,34 @@
+<br>
+<br>
+<br>
+<h2 align="center">Set the alert mode on? </h2>
+<br>
+<br>
+<br>
+<div [hidden]="edited" class="alertbox">
+  <br>
+  <br>
+
+  <h3 align="center" style="color:red">Click on alert on button now to send alert to emergency force!</h3>
+  <br>
+  <br>
+  <br>
+  <button class="btn btn-danger" id="sosOn" name="sosOn" (click)="sos(true)">ALERT ON</button>
+  <br>
+  <br>
+  <br>
+</div>
+
+<div [hidden]="!edited" class="alertbox">
+  <br>
+  <br>
+
+  <h3 align="center" style="color:red">Click on alert off button now to stop the alert created</h3>
+  <br>
+  <br>
+  <br>
+  <button class="btn btn-success" id="sosOff" name="sosOff" (click)="sos(false)">ALERT OFF</button>
+  <br>
+  <br>
+  <br>
+</div>

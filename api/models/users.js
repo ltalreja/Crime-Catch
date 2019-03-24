@@ -68,6 +68,10 @@ var userSchema = mongoose.Schema({
     modifiedDate: {
         type: Date,
         default: Date.now()
+    },
+    emergencyContact: {
+        name: String,
+        email: String
     }
 });
 
@@ -91,8 +95,9 @@ userSchema.methods.generateJwt = function () {
         name: this.name,
         ssn: this.ssn,
         phoneNo: this.phoneNo,
+        role: this.role,
         exp: parseInt(expiry.getTime() / 1000),
     }, process.env.SECRET_KEY);
 };
 
-mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', userSchema);

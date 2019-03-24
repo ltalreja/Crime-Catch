@@ -1,0 +1,28 @@
+<div id="filterbar">
+  <b>Filter Streets  </b>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <select [(ngModel)]='inputText'  >
+  <option [ngValue]=""></option>
+  <option *ngFor = "let street of Street"  >{{street}}</option>
+  </select>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <b> Filter Crimes  </b>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <select [(ngModel)]='crimetext'  >
+  <option [ngValue]=""></option>
+  <option *ngFor = "let crime of crimetype" >{{crime}}</option>
+  </select>
+  &nbsp;&nbsp;&nbsp;
+  <button class="button" (click)="getfunction()">Filter Streets
+  </button>
+</div>
+<agm-map [zoom]=15 [zoomControl]='true' [latitude]="42.3398198" [longitude]="-71.0875516" [usePanning]="true">
+<ng-container *ngFor="let place of temp ">
+  <agm-marker (markerClick)="markerClick(infoWindow)" [latitude]="place.Lat" [longitude]="place.Long" [iconUrl] =getIcon(place.OFFENSE_CODE_GROUP)>
+  <agm-info-window #infoWindow>
+     <div id="crimeheader" >{{place.OFFENSE_CODE_GROUP}}</div>
+     <br><b> Street:&emsp;{{place.STREET}}</b> <br><b>Date:&emsp;{{place.OCCURRED_ON_DATE}}</b><br><b>Description:&emsp;{{place.OFFENSE_DESCRIPTION}}</b><br><b>Latitude:&emsp;{{place.Lat}}</b><br><b>Longitude:&emsp;{{place.Long}}</b><br>
+  </agm-info-window>
+  </agm-marker>
+</ng-container>
+</agm-map>

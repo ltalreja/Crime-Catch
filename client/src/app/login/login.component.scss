@@ -1,0 +1,32 @@
+
+.btnColor{
+  color:black;
+  background-color: orange;
+  }
+
+.main-container{
+  margin: 9% 37% 0%;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  width: 21rem;
+  background: white;
+  height: 390px;
+  padding: 2%;
+}
+
+/deep/ .mat-form-field-wrapper .mat-form-field-flex .mat-form-field-infix{
+  width: 250px;
+}
+
+/deep/ .mat-focused .mat-form-field-label {
+  color: orange !important;
+}
+
+/deep/ .mat-form-field-ripple {
+  background-color: orange !important;
+}
+
+/deep/ .mat-form-field-appearance-legacy.mat-form-field-invalid:not(.mat-focused) .mat-form-field-ripple {
+  background-color: red !important;
+}
+

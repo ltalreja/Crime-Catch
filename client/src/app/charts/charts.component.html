@@ -1,0 +1,14 @@
+<br>
+<br>
+
+<h2 align= "center" style="color: orange">Day wise crime report</h2>
+<div style="display: block" *ngIf="dataLoaded" class="barChart">
+    <canvas baseChart
+    [datasets]="barChartData"
+    [labels]="barChartLabels"
+    [options]="barChartOptions"
+    [legend]="barChartLegend"
+    [chartType]="barChartType"></canvas>
+</div>
+<br>
+<br>

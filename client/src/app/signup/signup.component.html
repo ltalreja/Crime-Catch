@@ -1,0 +1,133 @@
+<mat-card class="main-container">
+  <mat-card-title>
+    Register
+  </mat-card-title>
+  <p class="lead">Already a member? Please <a routerLink="/login">Log in</a> instead.</p>
+  <mat-card-content>
+    <form novalidate [formGroup]="signupForm" (ngSubmit)="register()">
+      <table>
+        <tr>
+          <td>
+            <mat-form-field class="demo-full-width">
+              <input matInput #ssn maxlength="9" name="ssn" placeholder="SSN" formControlName="ssn">
+              <mat-hint align="end">{{ssn.value?.length || 0}}/9</mat-hint>
+              <mat-error *ngIf="signupForm.controls.ssn.invalid">{{getSSNErrorMessage()}}</mat-error>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="demo-full-width">
+              <input matInput placeholder="First Name" name="firstname" formControlName="firstname">
+              <mat-error *ngIf="signupForm.controls.firstname.invalid">You must enter a value</mat-error>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="demo-full-width">
+              <input matInput placeholder="Last Name" name="lastname" formControlName="lastname">
+              <mat-error *ngIf="signupForm.controls.lastname.invalid">You must enter a value</mat-error>
+            </mat-form-field>
+          </td>
+        <tr>
+          <td>
+            <mat-form-field class="demo-full-width">
+              <input matInput placeholder="Email" name="email" formControlName="email">
+              <mat-error *ngIf="signupForm.controls.email.invalid">{{getEmailErrorMessage()}}</mat-error>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="demo-full-width">
+              <input matInput placeholder="Password" name="password" [type]="hide ? 'text' : 'password'"
+                formControlName="password">
+              <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+              <mat-error *ngIf="signupForm.controls.password.invalid">{{getPasswordErrorMessage()}}</mat-error>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="demo-full-width">
+              <input matInput placeholder="Confirm Password" name="cpassword" [type]="hide ? 'text' : 'password'"
+                formControlName="confirmPassword">
+              <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+              <mat-error *ngIf="signupForm.controls.confirmPassword.invalid">{{getPasswordErrorMessage()}}</mat-error>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="demo-full-width">
+              <input matInput maxlength="20" name="street" placeholder="Address Line 1" formControlName="address1">
+              <mat-error *ngIf="signupForm.controls.address1.invalid">You must enter a value</mat-error>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="demo-full-width">
+              <input matInput maxlength="15" name="address2" placeholder="Address Line 2" formControlName="address2">
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="demo-full-width">
+              <mat-select [(value)]="selectedCity" placeholder="City" name="City" formControlName="city">
+                <mat-option *ngFor="let city of cities" [value]="city">{{city}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="signupForm.controls.city.invalid">You must select a value</mat-error>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="demo-full-width">
+              <mat-select [(value)]="selectedState" placeholder="State" name="State" formControlName="state">
+                <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="signupForm.controls.state.invalid">You must select a value</mat-error>
+            </mat-form-field>
+          </td>
+
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="demo-full-width">
+              <mat-select [(value)]="selectedCountry" placeholder="Country" name="country" formControlName="country">
+                <mat-option *ngFor="let country of countries" [value]="country">{{country}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="signupForm.controls.country.invalid">You must select a value</mat-error>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="demo-full-width">
+              <input matInput #zip maxlength="5" name="zipcode" placeholder="Zipcode" formControlName="zipcode">
+              <mat-hint align="end">{{zip.value?.length || 0}}/5</mat-hint>
+              <mat-error *ngIf="signupForm.controls.zipcode.invalid">{{getZIPErrorMessage()}}</mat-error>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="demo-full-width">
+              <input matInput #cellphone maxlength="10" name="phone" placeholder="Cell Number" formControlName="cellphone">
+              <mat-hint align="end">{{cellphone.value?.length || 0}}/10</mat-hint>
+              <mat-error *ngIf="signupForm.controls.cellphone.invalid">{{getCellPhoneErrorMessage()}}</mat-error>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="demo-full-width">
+              <input matInput placeholder="Emergency Contact Name" name="emerName" formControlName="emerName">
+              <mat-error *ngIf="signupForm.controls.emerName.invalid">You must enter a value</mat-error>
+            </mat-form-field>
+          </td>
+            <td>
+                <mat-form-field class="demo-full-width">
+                    <input matInput placeholder="Emergency Contact Email" name="emerEmail" formControlName="emerEmail">
+                    <mat-error *ngIf="signupForm.controls.emerEmail.invalid">{{getEmailErrorMessage()}}</mat-error>
+                  </mat-form-field>
+              </td>
+          </tr>
+      </table><br>
+      <button mat-raised-button class="btnColor">REGISTER</button>
+    </form>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,21 @@
+.main-container{
+  margin: 0.5% 32% 0%;
+}
+
+.btnColor{
+  color:black;
+  background-color: orange;
+  }
+
+/deep/ .mat-focused .mat-form-field-label {
+  color: orange !important;
+}
+
+/deep/ .mat-form-field-ripple {
+  background-color: orange !important;
+}
+
+/deep/ .mat-form-field-appearance-legacy.mat-form-field-invalid:not(.mat-focused) .mat-form-field-ripple {
+  background-color: red !important;
+}
+

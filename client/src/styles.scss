@@ -1,1 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic");
+@import "~node_modules/bootstrap/scss/bootstrap";
+
+.mat-card {
+  text-align: -webkit-center;
+  width: 40%;
+  height: 30%;
+  float: left;
+  margin: 10px;
+}
+
+.demo-full-width {
+  width: 90%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, sans-serif;
+}
+
+mat-card {
+  max-width: 80%;
+  margin: 2em auto;
+  text-align: center;
+}

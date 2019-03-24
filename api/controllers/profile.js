@@ -4,16 +4,16 @@ var User = mongoose.model('User');
 module.exports.profileRead = function (req, res) {
     if (!req.payload._id) {
         res.status(401).json({
-            "message": "UnauthorizedError: private profile"
+            message: "UnauthorizedError: private profile"
         });
     } else {
         User
             .findById(req.payload._id)
             .exec(function (err, user) {
                 if (user) {
-                    res.status(200).json(err);
+                    res.status(200).json(user);
                 } else {
-                    res.status(400).json({"message": "Invalid request data"});
+                    res.status(400).json({message: "Invalid request data"});
                 }
             });
     }
@@ -22,7 +22,7 @@ module.exports.profileRead = function (req, res) {
 module.exports.profileUpdate = function (req, res) {
     if (!req.payload._id) {
         res.status(401).json({
-            "message": "UnauthorizedError: private profile"
+            message: "UnauthorizedError: private profile"
         });
     } else {
         let user = req.body;
@@ -33,7 +33,7 @@ module.exports.profileUpdate = function (req, res) {
                 if (user) {
                     res.status(200).json(user);
                 } else {
-                    res.status(400).json({"message": "Invalid request data"});
+                    res.status(400).json({message: "Invalid request data"});
                 }
             });
     }
